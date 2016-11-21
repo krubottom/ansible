@@ -1,0 +1,9 @@
+---
+- hosts: guac
+  become: true
+
+  roles:
+    - common
+    - mysql
+    - tomcat
+    - guacd

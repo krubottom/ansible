@@ -1,0 +1,19 @@
+---
+- hosts: ubuntu
+  become: true
+
+  tasks:
+  - name: Update Cache
+    apt: update_cache=yes
+  - name: Install Hyper-V Guest
+    apt: name={{item}}
+    with_items:
+        - linux-tools-virtual-lts-xenial
+        - linux-cloud-tools-virtual-lts-xenial
+        - linux-image-virtual
+  - name: Check if a reboot is required
+    register: file
+    stat: path=/var/run/reboot-required get_md5=no
+  - name: Reboot the server
+    command: /sbin/reboot
+    when: file.stat.exists == true
