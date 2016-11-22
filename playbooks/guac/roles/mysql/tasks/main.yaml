@@ -1,8 +1,6 @@
 ---
 - name: Install MySQL
-  apt: name={{item}}
-  with_items:
-      - mysql-server
-      - mysql-client
-      - mysql-common
-      - mysql-utilities
+  apt: name=mysql-server
+  apt: name=mysql-client
+  apt: name=mysql-common
+  apt: name=mysql-utilities

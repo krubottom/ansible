@@ -1,12 +1,66 @@
-
+---
+- hosts: guac
+  become: true
   tasks:
   - name: Update Cache
     apt: update_cache=yes
+  - name: Install Deps
+    apt: name=libpng12-dev
+    apt: name=libossp-uuid-dev
+    apt: name=libfreerdp-dev
+    apt: name=libpango1.0-dev
+    apt: name=libssh2-1-dev
+    apt: name=libtelnet-dev
+    apt: name=libvncserver-dev
+    apt: name=libpulse-dev
+    apt: name=libssl-dev
+    apt: name=libvorbis-dev
+    apt: name=libwebp-dev
+    apt: name=mysql-server
+    apt: name=mysql-client
+    apt: name=mysql-common
+    apt: name=mysql-utilities
+    apt: name=tomcat8
+    apt: name=freerdp
+    apt: name=ghostscript
+    apt: name=wget
+    apt: name=curl
 
-  - name: Restart Services
+  - name: Download and install libjpeg-turbo
+    get_url:
+      url: http://downloads.sourceforge.net/project/libjpeg-turbo/1.5.0/libjpeg-turbo-official_1.5.0_amd64.deb
+      dest: /tmp/libjpeg-turbo-official_1.5.0_amd64.deb
+    command: dpkg -i /tmp/libjpeg-turbo-official_1.5.0_amd64.deb
+
+  - file: path=/etc/default/tomcat8 owner=root group=root mode=0644
+  - lineinfile: dest=/etc/default/tomcat8 line="# GUACAMOLE EVN VARIABLE"
+  - lineinfile: dest=/etc/default/tomcat8 line="GUACAMOLE_HOME=/etc/guacamole"
+
+  - name: Download Guacample Files
+  - command: wget -O guacamole-0.9.9.war http://downloads.sourceforge.net/project/guacamole/current/binary/guacamole-0.9.9.war
+  - command: wget -O guacamole-server-0.9.9.tar.gz http://sourceforge.net/projects/guacamole/files/current/source/guacamole-server-0.9.9.tar.gz
+  - command: wget -O guacamole-auth-jdbc-0.9.9.tar.gz http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-jdbc-0.9.9.tar.gz
+  - command: wget -O mysql-connector-java-5.1.39.tar.gz http://dev.mysql.com/get/Downloads/Connector/j/mysql-connector-java-5.1.39.tar.gz
+
+  - name: Extract Guacamole Files
+  - command: tar -xzf guacamole-server-0.9.9.tar.gz
+  - command: tar -xzf guacamole-auth-jdbc-0.9.9.tar.gz
+  - command: tar -xzf mysql-connector-java-5.1.39.tar.gz
+
+  - file: path=/etc/ state=directory
+
+  - name: MAKE DIRECTORIES
+  - file: path=/etc/guacamole state=directory
+  - file: mkdir /etc/guacamole/lib state=directory
+  - file: mkdir /etc/guacamole/extensions state=directory
+
+
+
+
+  - name: ensure services are running
     service:
       name: tomcat8
-      state: restarted
+      state: started
 
 
 
