@@ -1,8 +1,4 @@
 ---
-- hosts: ubuntu
-  become: true
-
-  tasks:
   - name: Update Cache
     apt: update_cache=yes
   - name: Install Hyper-V Guest
