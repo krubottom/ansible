@@ -1,13 +1,38 @@
 ---
+# Install Features
+   apt: name={{item}}
+   with_items:
+     - libcairo2-dev
+     - libpng12-dev
+     - libossp-uuid-dev
+     - libfreerdp-dev
+     - libpango1.0-dev
+     - libssh2-1-dev
+     - libtelnet-dev
+     - libvncserver-dev
+     - libpulse-dev
+     - libssl-dev
+     - libvorbis-dev
+     - libwebp-dev
+     - freerdp
+     - ghostscript
+     - wget
+     - curl
+
+
   - file: path=/etc/default/tomcat8 owner=root group=root mode=0644
   - lineinfile: dest=/etc/default/tomcat8 line="# GUACAMOLE EVN VARIABLE"
   - lineinfile: dest=/etc/default/tomcat8 line="GUACAMOLE_HOME=/etc/guacamole"
 
-  - name: Download Guacamole Files
-    get_url: url=http://downloads.sourceforge.net/project/guacamole/current/binary/guacamole-0.9.9.war dest=/tmp/guacamole-0.9.9.war
-    get_url: url=http://sourceforge.net/projects/guacamole/files/current/source/guacamole-server-0.9.9.tar.gz dest=/tmp/guacamole-server-0.9.9.tar.gz
-    get_url: url=http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-jdbc-0.9.9.tar.gz dest=/tmp/guacamole-auth-jdbc-0.9.9.tar.gz
-    get_url: url=http://dev.mysql.com/get/Downloads/Connector/j/mysql-connector-java-5.1.39.tar.gz dest=mysql-connector-java-5.1.39.tar.gz
+  - name: Copy Guacamole Files
+    copy: src="files/libjpeg-turbo-official_1.5.0_amd64.deb" dest=/tmp/
+    copy: src="files/guacamole-0.9.9.war" dest=/tmp/
+    copy: src="files/current/source/guacamole-server-0.9.9.tar.gz" dest=/tmp/
+    copy: src="files/current/extensions/guacamole-auth-jdbc-0.9.9.tar.gz" dest=/tmp/
+    copy: src="file/mysql-connector-java-5.1.39.tar.gz" dest=/tmp/
+
+    # dpkg -i libjpeg-turbo-official_1.5.0_amd64.deb
+
 
   - name: Extract Guacamole Files
     unarchive: src=/tmp/guacamole-server-0.9.9.tar.gz dest=/tmp/guacamole-server-0.9.9
