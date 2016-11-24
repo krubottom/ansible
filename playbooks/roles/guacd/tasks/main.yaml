@@ -4,25 +4,17 @@
   - lineinfile: dest=/etc/default/tomcat8 line="GUACAMOLE_HOME=/etc/guacamole"
 
   - name: Download Guacamole Files
-    get_url:
-      url: http://downloads.sourceforge.net/project/guacamole/current/binary/guacamole-0.9.9.war
-      dest: /tmp/guacamole-0.9.9.war
-    get_url:
-      url: http://sourceforge.net/projects/guacamole/files/current/source/guacamole-server-0.9.9.tar.gz
-      dest: /tmp/guacamole-server-0.9.9.tar.gz
-    get_url:
-      url: http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-jdbc-0.9.9.tar.gz
-      dest: /tmp/guacamole-auth-jdbc-0.9.9.tar.gz
-    get_url:
-      url: http://dev.mysql.com/get/Downloads/Connector/j/mysql-connector-java-5.1.39.tar.gz
-      dest: mysql-connector-java-5.1.39.tar.gz
+    get_url: url=http://downloads.sourceforge.net/project/guacamole/current/binary/guacamole-0.9.9.war dest=/tmp/guacamole-0.9.9.war
+    get_url: url=http://sourceforge.net/projects/guacamole/files/current/source/guacamole-server-0.9.9.tar.gz dest=/tmp/guacamole-server-0.9.9.tar.gz
+    get_url: url=http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-jdbc-0.9.9.tar.gz dest=/tmp/guacamole-auth-jdbc-0.9.9.tar.gz
+    get_url: url=http://dev.mysql.com/get/Downloads/Connector/j/mysql-connector-java-5.1.39.tar.gz dest=mysql-connector-java-5.1.39.tar.gz
 
   - name: Extract Guacamole Files
     unarchive: src=/tmp/guacamole-server-0.9.9.tar.gz dest=/tmp/guacamole-server-0.9.9
     unarchive: src=/tmp/guacamole-auth-jdbc-0.9.9.tar.gz dest=/tmp/guacamole-auth-jdbc-0.9.9
     unarchive: src=/tmp/mysql-connector-java-5.1.39.tar.gz dest=/tmp/mysql-connector-java-5.1.39
 
-  - name: Make Directorys
+  - name: Make Directories
     file: path=/etc/guacamole state=directory
     file: mkdir /etc/guacamole/lib state=directory
     file: mkdir /etc/guacamole/extensions state=directory
