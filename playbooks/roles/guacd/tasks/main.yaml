@@ -1,45 +1,44 @@
 ---
 # Install Features
-  - name: Install Deps
-    apt: name={{item}}
-    with_items:
-      - libcairo2-dev
-      - libpng12-dev
-      - libossp-uuid-dev
-      - libfreerdp-dev
-      - libpango1.0-dev
-      - libssh2-1-dev
-      - libtelnet-dev
-      - libvncserver-dev
-      - libpulse-dev
-      - libssl-dev
-      - libvorbis-dev
-      - libwebp-dev
-      - freerdp
-      - ghostscript
-      - wget
-      - curl
+- name: Install Deps
+  apt: name={{item}}
+  with_items:
+    - libcairo2-dev
+    - libpng12-dev
+    - libossp-uuid-dev
+    - libfreerdp-dev
+    - libpango1.0-dev
+    - libssh2-1-dev
+    - libtelnet-dev
+    - libvncserver-dev
+    - libpulse-dev
+    - libssl-dev
+    - libvorbis-dev
+    - libwebp-dev
+    - freerdp
+    - ghostscript
+    - wget
+    - curl
 
-   - name: Copy Guacamole Files
-     copy: src="files/libjpeg-turbo-official_1.5.0_amd64.deb" dest=/tmp/
-     copy: src="files/guacamole-0.9.9.war" dest=/tmp/
-     copy: src="files/current/source/guacamole-server-0.9.9.tar.gz" dest=/tmp/
-     copy: src="files/current/extensions/guacamole-auth-jdbc-0.9.9.tar.gz" dest=/tmp/
-     copy: src="files/mysql-connector-java-5.1.39.tar.gz" dest=/tmp/
-     copy: src="files/tomcat8" dest=/etc/default/
+- name: Copy Guacamole Files
+  copy: src="files/libjpeg-turbo-official_1.5.0_amd64.deb" dest=/tmp/
+  copy: src="files/guacamole-0.9.9.war" dest=/tmp/
+  copy: src="files/current/source/guacamole-server-0.9.9.tar.gz" dest=/tmp/
+  copy: src="files/current/extensions/guacamole-auth-jdbc-0.9.9.tar.gz" dest=/tmp/
+  copy: src="files/mysql-connector-java-5.1.39.tar.gz" dest=/tmp/
+  copy: src="files/tomcat8" dest=/etc/default/
 
     # dpkg -i libjpeg-turbo-official_1.5.0_amd64.deb
 
+- name: Extract Guacamole Files
+  unarchive: src=/tmp/guacamole-server-0.9.9.tar.gz dest=/tmp/guacamole-server-0.9.9
+  unarchive: src=/tmp/guacamole-auth-jdbc-0.9.9.tar.gz dest=/tmp/guacamole-auth-jdbc-0.9.9
+  unarchive: src=/tmp/mysql-connector-java-5.1.39.tar.gz dest=/tmp/mysql-connector-java-5.1.39
 
-  - name: Extract Guacamole Files
-    unarchive: src=/tmp/guacamole-server-0.9.9.tar.gz dest=/tmp/guacamole-server-0.9.9
-    unarchive: src=/tmp/guacamole-auth-jdbc-0.9.9.tar.gz dest=/tmp/guacamole-auth-jdbc-0.9.9
-    unarchive: src=/tmp/mysql-connector-java-5.1.39.tar.gz dest=/tmp/mysql-connector-java-5.1.39
-
-  - name: Make Directories
-    file: path=/etc/guacamole state=directory
-    file: mkdir /etc/guacamole/lib state=directory
-    file: mkdir /etc/guacamole/extensions state=directory
+- name: Make Directories
+  file: path=/etc/guacamole state=directory
+  file: mkdir /etc/guacamole/lib state=directory
+  file: mkdir /etc/guacamole/extensions state=directory
 
 
 # # Install GUACD
