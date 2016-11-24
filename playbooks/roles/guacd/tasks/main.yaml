@@ -28,27 +28,27 @@
     file: mkdir /etc/guacamole/extensions state=directory
 
 
-# Install GUACD
-cd guacamole-server-0.9.9
-./configure --with-init-dir=/etc/init.d
-make
-make install
-ldconfig
-systemctl enable guacd
-cd ..
-
-
-# Move files to correct locations
-mv guacamole-0.9.9.war /etc/guacamole/guacamole.war
-ln -s /etc/guacamole/guacamole.war /var/lib/tomcat8/webapps/
-ln -s /usr/local/lib/freerdp/* /usr/lib/x86_64-linux-gnu/freerdp/.
-cp mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar /etc/guacamole/lib/
-cp guacamole-auth-jdbc-0.9.9/mysql/guacamole-auth-jdbc-mysql-0.9.9.jar /etc/guacamole/extensions/
-
-
-
-
-
-
-rm -rf /usr/share/tomcat8/.guacamole
-ln -s /etc/guacamole /usr/share/tomcat8/.guacamole
+# # Install GUACD
+# cd guacamole-server-0.9.9
+# ./configure --with-init-dir=/etc/init.d
+# make
+# make install
+# ldconfig
+# systemctl enable guacd
+# cd ..
+#
+#
+# # Move files to correct locations
+# mv guacamole-0.9.9.war /etc/guacamole/guacamole.war
+# ln -s /etc/guacamole/guacamole.war /var/lib/tomcat8/webapps/
+# ln -s /usr/local/lib/freerdp/* /usr/lib/x86_64-linux-gnu/freerdp/.
+# cp mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar /etc/guacamole/lib/
+# cp guacamole-auth-jdbc-0.9.9/mysql/guacamole-auth-jdbc-mysql-0.9.9.jar /etc/guacamole/extensions/
+#
+#
+#
+#
+#
+#
+# rm -rf /usr/share/tomcat8/.guacamole
+# ln -s /etc/guacamole /usr/share/tomcat8/.guacamole
