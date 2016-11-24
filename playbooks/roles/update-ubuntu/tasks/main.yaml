@@ -1,0 +1,5 @@
+---
+ - name: Update APT Cache
+   apt: update_cache=yes
+ - name: Upgrade Server
+   apt: upgrade=dist

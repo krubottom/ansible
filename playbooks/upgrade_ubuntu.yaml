@@ -1,13 +1,7 @@
-- hosts: ubuntu
-  become: true
-  tasks:
-   - name: Update APT Cache
-     apt: update_cache=yes
-   - name: Upgrade Server
-     apt: upgrade=dist
-   - name: Check if a reboot is required
-     register: file
-     stat: path=/var/run/reboot-required get_md5=no
-   - name: Reboot the server if needed
-     command: /sbin/reboot
-     when: file.stat.exists == true
+---
+ - hosts: ubuntu
+   become: true
+
+   roles:
+     - update-ubuntu
+     - checkreboot
