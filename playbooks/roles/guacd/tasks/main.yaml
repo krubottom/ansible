@@ -20,16 +20,17 @@
      - curl
 
 
-  - file: path=/etc/default/tomcat8 owner=root group=root mode=0644 state=directory
-  - lineinfile: dest=/etc/default/tomcat8 line="# GUACAMOLE EVN VARIABLE"
-  - lineinfile: dest=/etc/default/tomcat8 line="GUACAMOLE_HOME=/etc/guacamole"
+  # - file: path=/etc/default/tomcat8 owner=root group=root mode=0644
+  # - lineinfile: dest=/etc/default/tomcat8 line="# GUACAMOLE EVN VARIABLE"
+  # - lineinfile: dest=/etc/default/tomcat8 line="GUACAMOLE_HOME=/etc/guacamole"
 
   - name: Copy Guacamole Files
     copy: src="files/libjpeg-turbo-official_1.5.0_amd64.deb" dest=/tmp/
     copy: src="files/guacamole-0.9.9.war" dest=/tmp/
     copy: src="files/current/source/guacamole-server-0.9.9.tar.gz" dest=/tmp/
     copy: src="files/current/extensions/guacamole-auth-jdbc-0.9.9.tar.gz" dest=/tmp/
-    copy: src="file/mysql-connector-java-5.1.39.tar.gz" dest=/tmp/
+    copy: src="files/mysql-connector-java-5.1.39.tar.gz" dest=/tmp/
+    copy: src="files/tomcat8" dest=/etc/default/
 
     # dpkg -i libjpeg-turbo-official_1.5.0_amd64.deb
 
