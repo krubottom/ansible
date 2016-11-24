@@ -20,7 +20,7 @@
      - curl
 
 
-  - file: path=/etc/default/tomcat8 owner=root group=root mode=0644
+  - file: path=/etc/default/tomcat8 owner=root group=root mode=0644 state=directory
   - lineinfile: dest=/etc/default/tomcat8 line="# GUACAMOLE EVN VARIABLE"
   - lineinfile: dest=/etc/default/tomcat8 line="GUACAMOLE_HOME=/etc/guacamole"
 
