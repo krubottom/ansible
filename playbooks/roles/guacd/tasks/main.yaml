@@ -19,11 +19,6 @@
      - wget
      - curl
 
-
-  # - file: path=/etc/default/tomcat8 owner=root group=root mode=0644
-  # - lineinfile: dest=/etc/default/tomcat8 line="# GUACAMOLE EVN VARIABLE"
-  # - lineinfile: dest=/etc/default/tomcat8 line="GUACAMOLE_HOME=/etc/guacamole"
-
   - name: Copy Guacamole Files
     copy: src="files/libjpeg-turbo-official_1.5.0_amd64.deb" dest=/tmp/
     copy: src="files/guacamole-0.9.9.war" dest=/tmp/
