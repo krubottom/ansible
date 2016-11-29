@@ -1,0 +1,21 @@
+---
+  - name: Install PostgreSQL and Build Utils
+    apt: name={{item}}
+    with_items:
+      - postgresql
+      - postgresql-client
+      - postgresql-contrib
+      - python-pip
+      - python-dev
+      - build-essential
+      - libpq-dev
+      - git
+  - name: Install Python Modules
+    pip: name={{item}}
+    with_items:
+      - psycopg2
+      - flask
+      - Flask-AutoIndex
+      - flask-wtf
+
+  - git: repo=https://github.com/krubottom/novus-convert dest=/usr/novus-convert
