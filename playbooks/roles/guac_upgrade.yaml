@@ -1,0 +1,7 @@
+---
+ - hosts: guac
+   become: true
+
+   roles:
+     - update-ubuntu
+     - checkreboot
