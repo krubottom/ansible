@@ -3,5 +3,12 @@
     register: file
     stat: path=/var/run/reboot-required get_md5=no
   - name: Reboot the server if needed
-    command: /sbin/reboot
+    command: sleep 2 && /sbin/reboot
+    async: 1
+    poll: 0
+    ignore_errors: true
     when: file.stat.exists == true
+
+- name: "Wait for server to come back"
+    local_action: wait_for host={{ ansible_ssh_host }} port=22 state=started delay=10
+    become: false
